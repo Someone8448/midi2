@@ -43,3 +43,6 @@ or if you want to increase the amount of allocated memory (in MB)
 ```
 node --max-old-space-size=8192 .
 ```
+## Required Packages
+the required packages to install are mpp-client-net, midi-player-js, axios, node-downloader-helper
+you can run `npm i mpp-client-net midi-player-js axios node-downloader-helper` to install all of these.
