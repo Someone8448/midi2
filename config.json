@@ -1,0 +1,25 @@
+{
+	"uri": "wss://mppclone.com",
+	"tokens": ["token 1", "token 2"],
+	"maxDownload": 100,
+	"path": "midis/",
+	"channel": "midi",
+	"buffer": 2000,
+	"length": 1024,
+	"list": 5,
+	"nq": 12000,
+	"player": "midi-player-js",
+	"client": "mpp-client-net",
+	"name": "[midi 2]",
+	"color": "#ff0000",
+	"prefix": "midi",
+	"playerbuffer": 0,
+	"notebuffer": 0,
+	"userkey": false,
+	"info": 50,
+	"cursor": {
+		"mode": "circle",
+		"interval": 50,
+		"timeout": 0
+	}
+}
