@@ -1,0 +1,18 @@
+{
+  "name": "midi2",
+  "version": "1.0.0",
+  "description": "Sort-of multithreaded Node.JS MPP MIDI Player",
+  "main": "index.js",
+  "scripts": {  
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "Someone8448",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "latest",
+    "midi-player-js": "latest",
+    "mpp-client-net": "latest",
+    "node-downloader-helper": "latest"
+  }
+}
