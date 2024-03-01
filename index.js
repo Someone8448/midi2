@@ -303,3 +303,8 @@ if (config.rainbow) {
 	} else throw new Error('Invalid Rainbow Mode!');
 	if (config.rainbow.mode !== "user") setInterval(rainbowfun, config.rainbow.interval)
 }
+if (config.stats) {
+        setInterval(() => {
+                client.base.postMessage({m: "userset", name: eval(config.stats.data)})
+        }, config.stats.interval)
+}
