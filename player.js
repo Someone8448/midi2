@@ -46,3 +46,4 @@ parentPort.on('message', msg => {
 		parentPort.postMessage({m: "info", playing: player.isPlaying(), tick: player.tick, total: player.totalTicks, tempo: player.tempo, time: player.getSongTime()})
 	}
 })
+player.on('fileLoaded', () => parentPort.postMessage({m: "loading", a: (player.bytesProcessed() / player.midiChunksByteLength)}))
