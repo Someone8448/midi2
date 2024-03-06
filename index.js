@@ -84,6 +84,7 @@ for (var i = 0; i < client.clients.length; i++) press.push(false);
 }
 var sustain = false;
 var deblack = false;
+var loading = 0;
 if (config.info) {
 var info = {m: "info", playing: false, tick: 1, total: 2, tempo: 120, time: 5};
 setInterval(() => player.postMessage({m: "info"}), config.info)
@@ -138,11 +139,17 @@ player.on('message', m => {
 	nq.spend(1)
 });
 player.on('message', msg => {
-if (msg.m !== "load") return
+if (msg.m !== "load") return;
+	loading = 0
 	speak.say(`Loaded in ${msg.t.toFixed(2)}ms`)
+})
+player.on('message', msg => {
+if (msg.m !== "loading") return;
+        loading = msg.a;
 })
 player.on('exit', createPlayer);
 player.on('error', createPlayer);
+loading = 0
 }
 createPlayer()
 var info = () => {
