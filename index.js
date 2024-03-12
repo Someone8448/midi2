@@ -315,3 +315,29 @@ if (config.stats) {
                 client.base.postMessage({m: "userset", name: eval(config.stats.data)})
         }, config.stats.interval)
 }
+
+if (config.cpu) { 
+function secNSec2ms (secNSec) {
+  if (Array.isArray(secNSec)) { 
+    return secNSec[0] * 1000 + secNSec[1] / 1000000; 
+  }
+  return secNSec / 1000; 
+}
+ 
+var startTime = process.hrtime();
+var startUsage = process.cpuUsage();
+var cpuUsage = 0;
+
+setInterval(() => {
+        var elapTime = process.hrtime(startTime)
+        var elapUsage = process.cpuUsage(startUsage)
+        var elapTimeMS = secNSec2ms(elapTime)
+        var elapUserMS = secNSec2ms(elapUsage.user)
+        var elapSystMS = secNSec2ms(elapUsage.system)
+        var cpuPercent = Math.round(100 * (elapUserMS + elapSystMS) / elapTimeMS)
+        //console.log(cpuPercent);
+        cpuUsage = cpuPercent;
+        startTime = process.hrtime();
+        startUsage = process.cpuUsage()
+}, config.cpu)
+}
