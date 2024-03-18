@@ -30,6 +30,8 @@ parentPort.on('message', msg => {
 			if (m.m === "start") return client.startNote(m.n, m.v);
 			return client.stopNote(m.n)
 		}, m.delay));
+	} else if (msg.m === "data") {
+		client.sendArray(msg.a);
 	} else if (msg.m === "mouse") client.sendArray([{m: "m", x: msg.x, y: msg.y}]);
 })
 parentPort.postMessage({m: 'ready'})
