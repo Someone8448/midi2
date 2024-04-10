@@ -105,7 +105,7 @@ player.on('message', m => {
 			var vel = msg.velocity / 127;
 			if (!key) return;
 			if (msg.name === "Note on") {
-				if (deblack && config.deblack ? vel < ((nq.points / nq.max) * -1) + 1 : msg.velocity < 54) return;
+				if (deblack && (config.deblack ? vel < ((nq.points / nq.max) * -1) + 1 : msg.velocity < 54)) return;
 				client.client(config.userkey ? Math.floor((keys.indexOf(key)) / (keys.length / client.clients.length)) : undefined).note({m: "start", n: key, v: vel});
 				presses[key] = true;
 				nps++;
@@ -126,7 +126,7 @@ player.on('message', m => {
 	var vel = msg.a.velocity / 127;
 	if (!key) return;
 	if (msg.a.name === "Note on") {
-		if (deblack && config.deblack ? vel < ((nq.points / nq.max) * -1) + 1 : msg.a.velocity < 54) return;
+		if (deblack && (config.deblack ? vel < ((nq.points / nq.max) * -1) + 1 : msg.a.velocity < 54)) return;
 		client.client(config.userkey ? Math.floor((keys.indexOf(key)) / (keys.length / client.clients.length)) : undefined).note({m: "start", n: key, v: vel});
 		presses[key] = true;
 		nps++;
