@@ -105,7 +105,7 @@ player.on('message', m => {
 			var vel = msg.velocity / 127;
 			if (!key) return;
 			if (msg.name === "Note on") {
-				if (deblack && msg.velocity < 54) return;
+				if (deblack && config.deblack ? vel < ((nq.points / nq.max) * -1) + 1 : msg.velocity < 54) return;
 				client.client(config.userkey ? Math.floor((keys.indexOf(key)) / (keys.length / client.clients.length)) : undefined).note({m: "start", n: key, v: vel});
 				presses[key] = true;
 				nps++;
@@ -126,7 +126,7 @@ player.on('message', m => {
 	var vel = msg.a.velocity / 127;
 	if (!key) return;
 	if (msg.a.name === "Note on") {
-		if (deblack && msg.a.velocity < 54) return;
+		if (deblack && config.deblack ? vel < ((nq.points / nq.max) * -1) + 1 : msg.a.velocity < 54) return;
 		client.client(config.userkey ? Math.floor((keys.indexOf(key)) / (keys.length / client.clients.length)) : undefined).note({m: "start", n: key, v: vel});
 		presses[key] = true;
 		nps++;
@@ -182,6 +182,15 @@ if (args[0] === "download") {
     if (!fs.readdirSync(config.path).includes(args.slice(1).join(' '))) return speak.say('This file is not found, make sure you are using its full name.')
     player.postMessage({m: "stop"})
     player.postMessage({m: "load", a:`${config.path}${args.slice(1).join(' ')}`, id: 0})
+    var fileSize = fs.statSync(`${config.path}${args.slice(1).join(' ')}`).size;
+    if (fileSize >= Math.pow(1024, 3)) {
+        var fileS = `${(fileSize / Math.pow(1024, 3)).toFixed(1)}GB`;
+    } else if (fileSize > Math.pow(1024, 2)) {
+        var fileS = `${(fileSize / Math.pow(1024, 2)).toFixed(1)}MB`;
+    } else if (fileSize > 1024) {
+        var fileS = `${(fileSize / 1024).toFixed(1)}KB`;
+    } else var fileS = `${fileSize}B`
+    speak.say(`Loading \`${args.slice(1).join(' ')}\` (${fileS})...`);
     } catch (error) {
         console.log(error)
     return speak.say(`Loading failed.`)
