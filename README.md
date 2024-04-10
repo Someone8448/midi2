@@ -21,6 +21,7 @@ To set up this player, you will need to edit config.json. Here's a list of all t
         "playerbuffer": 0, //how often it will send messages from the player for note data
         "notebuffer": 0, //how often it will send note data to the clients
         "userkey": true, //if each user only plays to one part of the piano, setting to false makes it loop through clients
+        "deblack": false, //when false, it deblacks if vel is less than 54, but true makes it automatic based on nq
         "cpu": 1000, //define it as a number to start measuring cpu, the number is the interval in which it updates
         "info": 50, //how often the player stats used in some animations and data updates
         "cursor": { //you can remove this entire property to disable cursor
