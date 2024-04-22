@@ -10,7 +10,7 @@ parentPort.on('message', msg => {
 	//console.log(msg)
 	if (msg.m === "connect") {
 		if (loaded) return;
-		client = new (require(config.client))(config.uri, msg.token);
+		client = new (require(config.client).Client)(config.uri, msg.token);
 		client.setChannel(config.channel);
 		client.start();
 		client.on('hi', m => parentPort.postMessage(m));
